@@ -1,0 +1,56 @@
+<template>
+<section id="todoapp">
+    <header id="header">
+        <h1>todos</h1>
+        <form submit.delegate="addTodo()">
+            <input id="new-todo" placeholder="What needs to be done?" autofocus value.bind="newTodo">
+        </form>
+    </header>
+    <!-- This section should be hidden by default and shown when there are todos -->
+    <section id="main">
+        <input id="toggle-all" type="checkbox" checked.bind="allChecked" change.delegate="markAll(allChecked)">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul id="todo-list">
+            <!-- These are here just to show the structure of the list items -->
+            <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
+            <li repeat.for="todo of todos" class="${todo.completed ? 'completed' : ''}">
+                <div class="view" >
+                    <input class="toggle" type="checkbox" checked.bind="todo.completed" change.delegate="$parent.todoChanged()">
+                    <label dblclick.delegate="$parent.editTodo(todo)">${todo.title}</label>
+                    <button class="destroy" click.delegate="$parent.removeTodo(todo)"></button>
+                </div>
+                <form submit.delegate="saveEdits(todo, 'submit')">
+                    <input class="edit" value.bind="todo.title">
+                </form>
+            </li>
+        </ul>
+    </section>
+    <!-- This footer should hidden by default and shown when there are todos -->
+    <footer id="footer" if.bind="todos.length > 0">
+        <!-- This should be `0 items left` by default -->
+        <span id="todo-count"><strong>${remainingCount}</strong> item${remainingCount > 1 ? 's' : ''} left</span>
+        <!-- Remove this if you don't implement routing -->
+        <ul id="filters">
+            <li>
+                <a class="selected" href="#/">All</a>
+            </li>
+            <li>
+                <a href="#/active">Active</a>
+            </li>
+            <li>
+                <a href="#/completed">Completed</a>
+            </li>
+        </ul>
+        <!-- Hidden if no completed items are left ↓ -->
+        <button id="clear-completed" if.bind="completedCount > 0" click.delegate="clearCompleted()"></button>
+    </footer>
+</section>
+
+<footer id="info">
+  <p>Double-click to edit a todo</p>
+  <!-- Change this out with your name and url ↓ -->
+  <p>Created by <a href="http://sonnylab.com">@sonnylazuardi</a></p>
+  <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+</footer>
+
+</template>
