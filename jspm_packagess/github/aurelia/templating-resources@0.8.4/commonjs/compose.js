@@ -1,0 +1,98 @@
+/* */ 
+"format register";
+"use strict";
+
+var _prototypeProperties = function (child, staticProps, instanceProps) {
+  if (staticProps) Object.defineProperties(child, staticProps);
+  if (instanceProps) Object.defineProperties(child.prototype, instanceProps);
+};
+
+var Container = require("aurelia-dependency-injection").Container;
+var Behavior = require("aurelia-templating").Behavior;
+var CompositionEngine = require("aurelia-templating").CompositionEngine;
+var ViewSlot = require("aurelia-templating").ViewSlot;
+var ViewResources = require("aurelia-templating").ViewResources;
+var Compose = (function () {
+  function Compose(container, compositionEngine, viewSlot, viewResources) {
+    this.container = container;
+    this.compositionEngine = compositionEngine;
+    this.viewSlot = viewSlot;
+    this.viewResources = viewResources;
+  }
+
+  _prototypeProperties(Compose, {
+    metadata: {
+      value: function metadata() {
+        return Behavior.customElement("compose").withProperty("model").withProperty("view").withProperty("viewModel").noView();
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    inject: {
+      value: function inject() {
+        return [Container, CompositionEngine, ViewSlot, ViewResources];
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    }
+  }, {
+    bind: {
+      value: function bind(executionContext) {
+        this.executionContext = executionContext;
+        processInstruction(this, {
+          view: this.view,
+          viewModel: this.viewModel,
+          model: this.model
+        });
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    modelChanged: {
+      value: function modelChanged(newValue, oldValue) {
+        if (this.viewModel && typeof this.viewModel.activate === "function") {
+          this.viewModel.activate(newValue);
+        }
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    viewChanged: {
+      value: function viewChanged(newValue, oldValue) {
+        processInstruction(this, { view: newValue });
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    viewModelChanged: {
+      value: function viewModelChanged(newValue, oldValue) {
+        processInstruction(this, { viewModel: newValue });
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    }
+  });
+
+  return Compose;
+})();
+
+exports.Compose = Compose;
+
+
+function processInstruction(composer, instruction) {
+  composer.compositionEngine.compose(Object.assign(instruction, {
+    executionContext: composer.executionContext,
+    container: composer.container,
+    viewSlot: composer.viewSlot,
+    viewResources: composer.viewResources,
+    currentBehavior: composer.current
+  })).then(function (next) {
+    composer.current = next;
+  });
+}
