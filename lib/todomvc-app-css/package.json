@@ -1,0 +1,66 @@
+{
+  "name": "todomvc-app-css",
+  "version": "1.0.1",
+  "description": "CSS for TodoMVC apps",
+  "license": "CC-BY-4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tastejs/todomvc-app-css"
+  },
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com"
+  },
+  "files": [
+    "index.css"
+  ],
+  "keywords": [
+    "todomvc",
+    "tastejs",
+    "app",
+    "todo",
+    "template",
+    "css",
+    "style",
+    "stylesheet"
+  ],
+  "gitHead": "a629f09d4537dab97e60530e20634a471b17a98f",
+  "bugs": {
+    "url": "https://github.com/tastejs/todomvc-app-css/issues"
+  },
+  "homepage": "https://github.com/tastejs/todomvc-app-css",
+  "_id": "todomvc-app-css@1.0.1",
+  "scripts": {},
+  "_shasum": "9fafe892f8b559173dda4ace0c3af00defa40b98",
+  "_from": "todomvc-app-css@^1.0.0",
+  "_npmVersion": "1.4.28",
+  "_npmUser": {
+    "name": "sindresorhus",
+    "email": "sindresorhus@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "sindresorhus",
+      "email": "sindresorhus@gmail.com"
+    },
+    {
+      "name": "addyosmani",
+      "email": "addyosmani@gmail.com"
+    },
+    {
+      "name": "passy",
+      "email": "phartig@rdrei.net"
+    },
+    {
+      "name": "stephenplusplus",
+      "email": "sawchuk@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "9fafe892f8b559173dda4ace0c3af00defa40b98",
+    "tarball": "http://registry.npmjs.org/todomvc-app-css/-/todomvc-app-css-1.0.1.tgz"
+  },
+  "directories": {},
+  "_resolved": "http://registry.npmjs.org/todomvc-app-css/-/todomvc-app-css-1.0.1.tgz"
+}
