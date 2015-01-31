@@ -1,8 +1,9 @@
-/*
+.load-icon {
+    text-align: center;
+}
 
-app-template.css overrides
-
-remove this comment if used
-remove this file if not
-
-*/
+.load-icon i {
+    font-size: 2em;
+    margin: 20px;
+    color: #999;
+}
